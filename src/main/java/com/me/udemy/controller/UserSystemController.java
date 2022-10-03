@@ -47,6 +47,26 @@ public class UserSystemController {
 		
 	}
 	
+	
+	@GetMapping("/users?{tags}")
+	public ResponseEntity<Void> getUserWithTags(@PathVariable("tags") List<String> tagList) {
+		
+		try {
+			
+			System.out.println(tagList);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK); 
+		} catch(NoSuchElementException e){
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 	@PostMapping("")
 	public ResponseEntity<String> createUser(@RequestBody User user) {
 		
@@ -119,6 +139,8 @@ public class UserSystemController {
 		}
 		
 	}
+	
+	
 	
 	
 	
