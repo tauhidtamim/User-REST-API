@@ -1,5 +1,6 @@
 package com.me.udemy.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class User {
 	@JoinTable(name = "user_tag", 
 		joinColumns = @JoinColumn(name = "user_id"), 
 		inverseJoinColumns = @JoinColumn(name = "tag_id"))
-	Set<Tag> usedTags;
+	Set<Tag> usedTags = new HashSet<>();
 	
 	public Set<Tag> getUsedTags() {
 		return usedTags;

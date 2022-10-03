@@ -1,5 +1,6 @@
 package com.me.udemy.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Tag {
 	private double expiry;
 	
 	@ManyToMany(mappedBy = "usedTags")
-	Set <User> likes; 
+	Set <User> likes = new HashSet<>(); 
 	
 	
 	public Set<User> getLikes() {
