@@ -72,7 +72,9 @@ public class UserSystemController {
 			double expiry = helperTag.getExpiry();
 			List<String> tagList = helperTag.getTags();
 			
+			
 			for(String tag: tagList) {
+				System.out.println(tag);
 				createTagForUser(userID,tag, expiry);
 			}
 			
@@ -98,6 +100,7 @@ public class UserSystemController {
 			currUserSet.add(user);
 			newTag.setLikes(currUserSet);
 			
+			
 			tagService.saveTag(newTag);
 			
 			// fetch current tag status of user with id = userID
@@ -106,6 +109,7 @@ public class UserSystemController {
 			// update tag status
 			currTagSet.add(newTag);
 			user.setUsedTags(currTagSet);
+			
 			
 			
 			return new ResponseEntity<Void>(HttpStatus.CREATED);

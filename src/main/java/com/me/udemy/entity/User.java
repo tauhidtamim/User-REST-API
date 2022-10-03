@@ -27,7 +27,7 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "user_tag", 
 		joinColumns = @JoinColumn(name = "user_id"), 
-		inverseJoinColumns = @JoinColumn(name = "tag_id"))
+		inverseJoinColumns = @JoinColumn(name = "tag_name"))
 	Set<Tag> usedTags = new HashSet<>();
 	
 	public Set<Tag> getUsedTags() {

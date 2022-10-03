@@ -4,18 +4,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
 public class Tag {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	
+	@Id	
 	private String name;
+	
 	private double expiry;
 	
 	@ManyToMany(mappedBy = "usedTags")
@@ -40,12 +38,7 @@ public class Tag {
 		this.expiry = expiry;
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 	public String getName() {
 		return name;
 	}
