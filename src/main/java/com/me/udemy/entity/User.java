@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 
@@ -22,6 +24,9 @@ public class User {
 	private String phoneNo;
 	
 	@ManyToMany
+	@JoinTable(name = "user_tag", 
+		joinColumns = @JoinColumn(name = "user_id"), 
+		inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	Set<Tag> usedTags;
 	
 	@Override

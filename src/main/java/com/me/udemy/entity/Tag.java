@@ -17,7 +17,7 @@ public class Tag {
 	private String name;
 	private double expiry;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "usedTags")
 	Set <User> likes; 
 	
 	
