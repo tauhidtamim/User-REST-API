@@ -63,7 +63,7 @@ public class UserSystemController {
 	
 	
 	@PostMapping("/{userId}/tags")
-	public ResponseEntity<Void> createTagForUserHelper(@PathVariable("userID") Integer userID, @RequestBody HelperTag helperTag) {
+	public ResponseEntity<Void> createTagForUserHelper(@PathVariable("userId") Integer userID, @RequestBody HelperTag helperTag) {
 		
 		try {
 			
