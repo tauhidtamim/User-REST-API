@@ -2,6 +2,7 @@ package com.me.udemy.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import com.me.udemy.entity.HelperTag;
 import com.me.udemy.entity.Tag;
 import com.me.udemy.entity.User;
 import com.me.udemy.entity.UserResponse;
+import com.me.udemy.service.TagService;
 import com.me.udemy.service.UserService;
 
 @RestController
@@ -25,6 +27,9 @@ public class UserSystemController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TagService tagService;
 	
 	@GetMapping("/{userID}")
 	public ResponseEntity<UserResponse> getUser(@PathVariable Integer userID) {
@@ -58,7 +63,7 @@ public class UserSystemController {
 	
 	
 	@PostMapping("/{userId}/tags")
-	public ResponseEntity<Void> createTagForUserHelper(@RequestBody HelperTag helperTag) {
+	public ResponseEntity<Void> createTagForUserHelper(@PathVariable("userID") Integer userID, @RequestBody HelperTag helperTag) {
 		
 		try {
 			
@@ -68,7 +73,7 @@ public class UserSystemController {
 			List<String> tagList = helperTag.getTags();
 			
 			for(String tag: tagList) {
-				createTagForUser(tag, expiry);
+				createTagForUser(userID,tag, expiry);
 			}
 			
 			
@@ -81,10 +86,26 @@ public class UserSystemController {
 	}
 	
 	
-	public ResponseEntity<Void> createTagForUser(String tag, double expiry) {
+	public ResponseEntity<Void> createTagForUser(Integer userID, String tag, double expiry) {
 		
 		try {
 			
+			User user = userService.getUser(userID);
+			Tag newTag = new Tag(tag, expiry);
+			
+			// fetch & update user status of newTag
+			Set<User> currUserSet = newTag.getLikes();
+			currUserSet.add(user);
+			newTag.setLikes(currUserSet);
+			
+			tagService.saveTag(newTag);
+			
+			// fetch current tag status of user with id = userID
+			Set<Tag> currTagSet = user.getUsedTags();
+			
+			// update tag status
+			currTagSet.add(newTag);
+			user.setUsedTags(currTagSet);
 			
 			
 			return new ResponseEntity<Void>(HttpStatus.CREATED);

@@ -29,6 +29,14 @@ public class User {
 		inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	Set<Tag> usedTags;
 	
+	public Set<Tag> getUsedTags() {
+		return usedTags;
+	}
+
+	public void setUsedTags(Set<Tag> usedTags) {
+		this.usedTags = usedTags;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password

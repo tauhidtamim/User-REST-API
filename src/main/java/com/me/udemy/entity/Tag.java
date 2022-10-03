@@ -21,13 +21,20 @@ public class Tag {
 	Set <User> likes; 
 	
 	
+	public Set<User> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Set<User> likes) {
+		this.likes = likes;
+	}
+
 	public Tag() {
 		
 	}
 	
-	public Tag(Integer id, String name, double expiry) {
+	public Tag(String name, double expiry) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.expiry = expiry;
 	}
