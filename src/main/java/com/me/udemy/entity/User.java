@@ -1,9 +1,12 @@
 package com.me.udemy.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 
 @Entity
@@ -16,9 +19,10 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String password;
-	
 	private String phoneNo;
 	
+	@ManyToMany
+	Set<Tag> usedTags;
 	
 	@Override
 	public String toString() {
